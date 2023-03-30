@@ -3,6 +3,6 @@ import { AddSlice } from "./AddSlice"; //Add Slice Component
 
 export const Store = configureStore({
   reducer: {
-    AddSlice: AddSlice.actions,
+    AddSlice: AddSlice.reducer,
   },
 });
