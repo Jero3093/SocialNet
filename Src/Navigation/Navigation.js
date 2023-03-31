@@ -33,7 +33,7 @@ export default function Navigation() {
           component={Add}
           options={{
             tabBarIcon: ({ color, size }) => {
-              return <MaterialIcons name="add" size={size} color={color} />;
+              return <Octicons name="diff-added" size={size} color={color} />;
             },
           }}
         />
