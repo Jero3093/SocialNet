@@ -1,16 +1,17 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Octicons, MaterialIcons } from "@expo/vector-icons"; //Expo Icons
+import { Octicons } from "@expo/vector-icons"; //Expo Icons
 import Home from "../../Screens/Home"; //Home Screen
 import Add from "../../Screens/Add"; //Add Screen
+import Details from "../../Screens/Details"; //Details Screen
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
-  return (
-    <NavigationContainer>
+  function TabNav() {
+    return (
       <Tab.Navigator
         screenOptions={{
           tabBarShowLabel: false,
@@ -38,6 +39,15 @@ export default function Navigation() {
           }}
         />
       </Tab.Navigator>
+    );
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="HomeScreen" component={TabNav} />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

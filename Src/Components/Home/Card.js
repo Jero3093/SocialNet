@@ -1,8 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"; //Expo Icons
+import { useDispatch } from "react-redux"; //Redux Dispatch
+import { useNavigation } from "@react-navigation/native"; //Navigation
+import { AddSlice } from "../../Store/AddSlice"; //Add Slice Component
 
 const Card = ({ Data }) => {
+  const Dispatch = useDispatch(); //Dispatch
+  const navigation = useNavigation(); //Navigation
+
   return (
     <View style={styles.Container}>
       {/* Card Header */}
@@ -13,18 +19,25 @@ const Card = ({ Data }) => {
           {/* Localization */}
           <Text style={styles.Local}>{Data.Localization}</Text>
         </View>
-        <MaterialCommunityIcons
-          name="dots-horizontal"
-          size={24}
-          color="black"
-        />
+        <TouchableOpacity
+          onPress={() => {
+            Dispatch(AddSlice.actions.SetDetailsItem({ ItemID: Data.Id }));
+            navigation.navigate("Details");
+          }}
+        >
+          <MaterialCommunityIcons
+            name="dots-horizontal"
+            size={26}
+            color="black"
+          />
+        </TouchableOpacity>
       </View>
       {/* Image */}
       <Image source={{ uri: Data.Image }} style={styles.Image} />
       {/* Card Footer */}
-      <View style={styles.Footer}>
-        <Ionicons name="heart" size={30} color="black" />
-      </View>
+      <TouchableOpacity style={styles.Footer}>
+        <Ionicons name="heart" size={32} color="black" />
+      </TouchableOpacity>
     </View>
   );
 };
