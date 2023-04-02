@@ -12,7 +12,7 @@ import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
 import { FontAwesome } from "@expo/vector-icons"; //Expo Icon Component
 import * as ImagePicker from "expo-image-picker"; //Expo Image Picker Component
 
-export default function Add() {
+export default function Add({ navigation }) {
   const [Id, setId] = useState(""); //Id State
   const [User, setUser] = useState(""); //User State
   const [Localization, setLocalization] = useState(""); //Localization State
@@ -41,11 +41,11 @@ export default function Add() {
       Alert.alert("Sorry", "Please fill the form to continue");
     } else {
       Dispatch(AddSlice.actions.GetItems({ Items: Data }));
-      Alert.alert("Success", "Check the Home Page");
       setId("");
       setLocalization("");
       setUser("");
       setImage(null);
+      navigation.navigate("Home");
     }
   }; //Send Data Function
 
