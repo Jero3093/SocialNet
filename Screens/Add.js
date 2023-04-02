@@ -17,8 +17,9 @@ export default function Add({ navigation }) {
   const [User, setUser] = useState(""); //User State
   const [Localization, setLocalization] = useState(""); //Localization State
   const [Image, setImage] = useState(null); //Image State
+  const Like = 0; //Like Number
 
-  const Data = { Id, User, Localization, Image }; //Collection State
+  const Data = { Id, User, Localization, Image, Like }; //Collection Data State
 
   const Dispatch = useDispatch(); //Dispatch
 
