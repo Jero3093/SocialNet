@@ -35,9 +35,16 @@ const Card = ({ Data }) => {
       {/* Image */}
       <Image source={{ uri: Data.Image }} style={styles.Image} />
       {/* Card Footer */}
-      <TouchableOpacity style={styles.Footer}>
-        <Ionicons name="heart" size={32} color="black" />
-      </TouchableOpacity>
+      <View style={styles.Footer}>
+        <TouchableOpacity
+          onPress={() =>
+            Dispatch(AddSlice.actions.SetNewLike({ ItemId: Data, NewLike: 1 }))
+          }
+        >
+          <Ionicons name="ios-heart-outline" size={32} color="black" />
+        </TouchableOpacity>
+        <Text>{Data.Like} Likes</Text>
+      </View>
     </View>
   );
 };
@@ -71,5 +78,6 @@ const styles = StyleSheet.create({
   },
   Footer: {
     padding: 10,
+    rowGap: 7,
   },
 });

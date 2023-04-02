@@ -23,7 +23,13 @@ export const AddSlice = createSlice({
       const ItemId = action.payload.ItemID; //Specific Item ID from the Card
       const ItemData = state.Items.find((item) => item.Id === ItemId); //Find function to compare the Id of the Item from the Card with the Id of from the Items State
 
-      state.DetailsItem = ItemData;
+      state.DetailsItem = ItemData; //The Details Item State is equal to the Specific ItemData
+    },
+    SetNewLike: (state, action) => {
+      const { ItemId, NewLike } = action.payload; //Item Data and New Like Number
+      const Item = state.Items.find((item) => item.Id === ItemId.Id); //Filter of the Item with the Id
+
+      Item.Like += NewLike; //The Likes of the Item will be summed together with the Like Number and be desplaied in the card
     },
   },
 }); //Container of the function to change the States
