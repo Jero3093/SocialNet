@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux"; //Redux Selector - Dispatch
 import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
-import { Ionicons } from "@expo/vector-icons"; //Expo Icons
+import { Ionicons, Fontisto } from "@expo/vector-icons"; //Expo Icons
 import Header from "../Src/Components/Details/Header"; //Header Component
 
-export default function Details() {
+export default function Details({ navigation }) {
   const ItemData = useSelector((state) => state.AddSlice.DetailsItem); //Data from the Details Item State
 
   const Dispatch = useDispatch(); //Dispath
@@ -36,6 +36,9 @@ export default function Details() {
           >
             <Ionicons name="ios-heart-outline" size={32} color="black" />
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
+            <Fontisto name="commenting" size={24} color="black" />
+          </TouchableOpacity>
         </View>
         {/* Footer */}
         <View style={{ padding: 10 }}>
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
   ButtonsContainer: {
     padding: 10,
     flexDirection: "row",
-    columnGap: 10,
+    columnGap: 15,
+    alignItems: "center",
   },
 });

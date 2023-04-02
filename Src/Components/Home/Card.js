@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"; //Expo Icons
+import { Ionicons, MaterialCommunityIcons, Fontisto } from "@expo/vector-icons"; //Expo Icons
 import { useDispatch } from "react-redux"; //Redux Dispatch
 import { useNavigation } from "@react-navigation/native"; //Navigation
 import { AddSlice } from "../../Store/AddSlice"; //Add Slice Component
@@ -35,7 +35,7 @@ const Card = ({ Data }) => {
       {/* Image */}
       <Image source={{ uri: Data.Image }} style={styles.Image} />
       {/* Card Footer */}
-      <View style={styles.Footer}>
+      <View style={styles.ButtonsContainer}>
         <TouchableOpacity
           onPress={() =>
             Dispatch(AddSlice.actions.SetNewLike({ ItemId: Data, NewLike: 1 }))
@@ -43,6 +43,11 @@ const Card = ({ Data }) => {
         >
           <Ionicons name="ios-heart-outline" size={32} color="black" />
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
+          <Fontisto name="commenting" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.Footer}>
         <Text>{Data.Like} Likes</Text>
       </View>
     </View>
@@ -76,8 +81,14 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 350,
   },
-  Footer: {
+  ButtonsContainer: {
     padding: 10,
     rowGap: 7,
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 15,
+  },
+  Footer: {
+    padding: 10,
   },
 });

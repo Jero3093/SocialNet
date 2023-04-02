@@ -5,6 +5,7 @@ import { Octicons } from "@expo/vector-icons"; //Expo Icons
 import Home from "../../Screens/Home"; //Home Screen
 import Add from "../../Screens/Add"; //Add Screen
 import Details from "../../Screens/Details"; //Details Screen
+import Comments from "../../Screens/Comments"; //Comments Screen
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,6 +48,11 @@ export default function Navigation() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="HomeScreen" component={TabNav} />
         <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen
+          name="Comments"
+          component={Comments}
+          options={{ presentation: "modal" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
