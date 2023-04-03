@@ -31,6 +31,12 @@ export const AddSlice = createSlice({
 
       Item.Like += NewLike; //The Likes of the Item will be summed together with the Like Number and be desplaied in the card
     },
+    SetComment: (state, action) => {
+      const { Comment, ItemID } = action.payload; //Comment String and Item Id from the Comment Section
+      const Item = state.Items.find((item) => item.Id === ItemID); //Filter of the Item with the Id
+
+      Item.Comments = Comment; //The default Comment of the Item will be replaced with the Comment from the Comment Section
+    },
   },
 }); //Container of the function to change the States
 

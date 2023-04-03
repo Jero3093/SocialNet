@@ -18,8 +18,9 @@ export default function Add({ navigation }) {
   const [Localization, setLocalization] = useState(""); //Localization State
   const [Image, setImage] = useState(null); //Image State
   const Like = 0; //Like Number
+  const Comments = null; //Comments
 
-  const Data = { Id, User, Localization, Image, Like }; //Collection Data State
+  const Data = { Id, User, Localization, Image, Like, Comments }; //Collection Data State
 
   const Dispatch = useDispatch(); //Dispatch
 
@@ -80,7 +81,7 @@ export default function Add({ navigation }) {
       </TouchableOpacity>
       {/* Submit Button */}
       <TouchableOpacity style={styles.SubmitButton} onPress={SendData}>
-        <Text style={styles.ButtonText}>Send</Text>
+        <Text style={styles.ButtonText}>Post</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   },
   Input: {
     width: "80%",
-    height: 40,
+    height: 50,
     borderRadius: 10,
     backgroundColor: "#12121212",
     padding: 10,

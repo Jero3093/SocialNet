@@ -34,8 +34,9 @@ const Card = ({ Data }) => {
       </View>
       {/* Image */}
       <Image source={{ uri: Data.Image }} style={styles.Image} />
-      {/* Card Footer */}
+      {/* Buttons */}
       <View style={styles.ButtonsContainer}>
+        {/* Like Button */}
         <TouchableOpacity
           onPress={() =>
             Dispatch(AddSlice.actions.SetNewLike({ ItemId: Data, NewLike: 1 }))
@@ -43,10 +44,17 @@ const Card = ({ Data }) => {
         >
           <Ionicons name="ios-heart-outline" size={32} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Comments")}>
+        {/* Comments Button */}
+        <TouchableOpacity
+          onPress={() => {
+            Dispatch(AddSlice.actions.SetDetailsItem({ ItemID: Data.Id }));
+            navigation.navigate("Comments");
+          }}
+        >
           <Fontisto name="commenting" size={24} color="black" />
         </TouchableOpacity>
       </View>
+      {/* Card Footer */}
       <View style={styles.Footer}>
         <Text>{Data.Like} Likes</Text>
       </View>
