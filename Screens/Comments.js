@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { FlashList } from "@shopify/flash-list"; //Flash List Component
 import { AntDesign } from "@expo/vector-icons"; //Expo Icons
 import { useSelector, useDispatch } from "react-redux"; //Redux Selector - Dispatch Component
 import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
+import CommentCard from "../Src/Components/Comments/CommentCard"; //Comment Card Component
 
 export default function Comments({ navigation }) {
   const [Comment, setComment] = useState(""); //Comment State
@@ -27,9 +26,7 @@ export default function Comments({ navigation }) {
         onPress={() => navigation.goBack()}
       ></TouchableOpacity>
       {/* Comments List */}
-      <View>
-        <Text>{ItemData.Comments} </Text>
-      </View>
+      <CommentCard Comment={ItemData.Comments} />
       {/* Text Input */}
       <View style={styles.Footer}>
         <TextInput
@@ -40,6 +37,7 @@ export default function Comments({ navigation }) {
           onChangeText={(text) => setComment(text)}
         />
         <TouchableOpacity
+          //Send the comment to the reducer function
           onPress={() =>
             Dispatch(
               AddSlice.actions.SetComment({
@@ -82,5 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
+    marginTop: "auto",
+    marginBottom: 20,
   },
 });
