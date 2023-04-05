@@ -18,6 +18,25 @@ export default function Details({ navigation }) {
 
   const Dispatch = useDispatch(); //Dispath
 
+  const CommentText = () => {
+    if (ItemData.Comments) {
+      return (
+        <View
+          style={{
+            borderTopWidth: 0.5,
+            borderTopColor: "#12121220",
+            padding: 10,
+            marginTop: 20,
+          }}
+        >
+          <Text style={{ fontSize: 16 }}>{ItemData.Comments}</Text>
+        </View>
+      );
+    } else {
+      return;
+    }
+  };
+
   return (
     <SafeAreaView style={styles.Container}>
       <ScrollView>
@@ -43,6 +62,7 @@ export default function Details({ navigation }) {
         {/* Footer */}
         <View style={{ padding: 10 }}>
           <Text style={{ fontSize: 16 }}>{ItemData.Like} Likes</Text>
+          <CommentText />
         </View>
       </ScrollView>
     </SafeAreaView>
