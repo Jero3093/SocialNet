@@ -3,19 +3,19 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; //Expo Icons
 import { useNavigation } from "@react-navigation/native"; //Navigation
 
-const Header = ({ Data }) => {
+const Header = ({ Data, TextColor }) => {
   const navigation = useNavigation(); //Navigation
 
   return (
     <View style={styles.Container}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Ionicons name="chevron-back-outline" size={30} color="black" />
+        <Ionicons name="chevron-back-outline" size={30} color={TextColor} />
       </TouchableOpacity>
       <View style={styles.Content}>
-        <Text numberOfLines={1} style={styles.User}>
+        <Text numberOfLines={1} style={{ color: TextColor, fontSize: 18 }}>
           {Data.User}
         </Text>
-        <Text numberOfLines={1} style={styles.Localization}>
+        <Text numberOfLines={1} style={{ color: TextColor, fontSize: 14 }}>
           {Data.Localization}
         </Text>
       </View>
@@ -37,11 +37,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     rowGap: 5,
     marginLeft: 20,
-  },
-  User: {
-    fontSize: 18,
-  },
-  Localization: {
-    fontSize: 14,
   },
 });

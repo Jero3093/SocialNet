@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"; //Redux Dispatch
 import { useNavigation } from "@react-navigation/native"; //Navigation
 import { AddSlice } from "../../Store/AddSlice"; //Add Slice Component
 
-const Card = ({ Data }) => {
+const Card = ({ Data, TextColor }) => {
   const Dispatch = useDispatch(); //Dispatch
   const navigation = useNavigation(); //Navigation
 
@@ -15,9 +15,13 @@ const Card = ({ Data }) => {
       <View style={styles.Header}>
         <View>
           {/* User */}
-          <Text style={styles.User}>{Data.User}</Text>
+          <Text style={{ fontSize: 17, marginBottom: 5, color: TextColor }}>
+            {Data.User}
+          </Text>
           {/* Localization */}
-          <Text style={styles.Local}>{Data.Localization}</Text>
+          <Text style={{ fontSize: 12, color: TextColor }}>
+            {Data.Localization}
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
@@ -28,7 +32,7 @@ const Card = ({ Data }) => {
           <MaterialCommunityIcons
             name="dots-horizontal"
             size={26}
-            color="black"
+            color={TextColor}
           />
         </TouchableOpacity>
       </View>
@@ -42,7 +46,7 @@ const Card = ({ Data }) => {
             Dispatch(AddSlice.actions.SetNewLike({ ItemId: Data, NewLike: 1 }))
           }
         >
-          <Ionicons name="ios-heart-outline" size={32} color="black" />
+          <Ionicons name="ios-heart-outline" size={32} color={TextColor} />
         </TouchableOpacity>
         {/* Comments Button */}
         <TouchableOpacity
@@ -51,12 +55,12 @@ const Card = ({ Data }) => {
             navigation.navigate("Comments");
           }}
         >
-          <Fontisto name="commenting" size={24} color="black" />
+          <Fontisto name="commenting" size={24} color={TextColor} />
         </TouchableOpacity>
       </View>
       {/* Card Footer */}
       <View style={styles.Footer}>
-        <Text>{Data.Like} Likes</Text>
+        <Text style={{ color: TextColor }}>{Data.Like} Likes</Text>
       </View>
     </View>
   );
@@ -66,7 +70,6 @@ export default Card;
 
 const styles = StyleSheet.create({
   Container: {
-    flexDirection: "column",
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
     borderTopColor: "#12121212",
@@ -77,13 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     alignItems: "center",
-  },
-  User: {
-    fontSize: 17,
-    marginBottom: 5,
-  },
-  Local: {
-    fontSize: 12,
   },
   Image: {
     width: "100%",

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar"; //Expo Status Bar
 import { useSelector } from "react-redux"; //Redux Selector Functions
 import { FlashList } from "@shopify/flash-list"; //Flash List Component
@@ -13,13 +13,17 @@ export default function Home() {
 
   const Count = useSelector(ItemsCount); //Items Count from the Items Global State
 
+  const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background State
+
+  const ColorText = useSelector((state) => state.BackgroundSlice.Text); //Text Color State
+
   const Background = () => {
     if (Count >= 1) {
       return (
         <FlashList
           data={AddItems}
           estimatedItemSize={100}
-          renderItem={({ item }) => <Card Data={item} />}
+          renderItem={({ item }) => <Card Data={item} TextColor={ColorText} />}
         />
       );
     } else {
@@ -35,8 +39,8 @@ export default function Home() {
   }; //Background Component
 
   return (
-    <SafeAreaView style={styles.Container}>
-      <StatusBar style="dark" />
+    <SafeAreaView style={{ flex: 1, backgroundColor: BackgroundColor }}>
+      <StatusBar style={ColorText === "black" ? "dark" : "light"} />
       {/* Header */}
       <Header />
       {/* Background */}
@@ -44,10 +48,3 @@ export default function Home() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});

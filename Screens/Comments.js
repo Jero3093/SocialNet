@@ -16,21 +16,40 @@ export default function Comments({ navigation }) {
 
   const ItemData = useSelector((state) => state.AddSlice.DetailsItem); //Item Data
 
+  const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background State
+
+  const ColorText = useSelector((state) => state.BackgroundSlice.Text); //Text Color State
+
   const Dispatch = useDispatch(); //Dispatch
 
   return (
-    <SafeAreaView style={styles.Container}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: BackgroundColor }}>
       {/* Top Button */}
       <TouchableOpacity
-        style={styles.TopButton}
+        style={{
+          alignSelf: "center",
+          marginTop: 20,
+          backgroundColor: ColorText,
+          width: 60,
+          height: 8,
+          borderRadius: 20,
+          marginBottom: 15,
+        }}
         onPress={() => navigation.goBack()}
       ></TouchableOpacity>
       {/* Comments List */}
-      <CommentCard Comment={ItemData.Comments} />
+      <CommentCard Comment={ItemData.Comments} TextColor={ColorText} />
       {/* Text Input */}
       <View style={styles.Footer}>
         <TextInput
-          style={styles.Input}
+          style={{
+            alignSelf: "center",
+            width: "80%",
+            height: 50,
+            backgroundColor: ColorText,
+            padding: 10,
+            borderRadius: 30,
+          }}
           placeholder="Write a comment..."
           placeholderTextColor={"black"}
           value={Comment}
@@ -47,7 +66,7 @@ export default function Comments({ navigation }) {
             )
           }
         >
-          <AntDesign name="arrowup" size={30} color="black" />
+          <AntDesign name="arrowup" size={30} color={ColorText} />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -55,27 +74,6 @@ export default function Comments({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  TopButton: {
-    alignSelf: "center",
-    marginTop: 20,
-    backgroundColor: "#12121235",
-    width: 60,
-    height: 8,
-    borderRadius: 20,
-    marginBottom: 15,
-  },
-  Input: {
-    alignSelf: "center",
-    width: "80%",
-    height: 50,
-    backgroundColor: "#12121230",
-    padding: 10,
-    borderRadius: 30,
-  },
   Footer: {
     flexDirection: "row",
     alignItems: "center",

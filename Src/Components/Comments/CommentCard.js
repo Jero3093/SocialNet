@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const CommentCard = ({ Comment }) => {
+const CommentCard = ({ Comment, TextColor }) => {
   return (
     <View style={styles.Container}>
-      <Text style={styles.Text}>{Comment}</Text>
+      <Text style={{ color: TextColor, fontSize: 16 }}>{Comment}</Text>
     </View>
   );
 };
@@ -16,8 +16,5 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     borderTopColor: "#12121220",
     padding: 10,
-  },
-  Text: {
-    fontSize: 16,
   },
 });

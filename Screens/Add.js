@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { useDispatch } from "react-redux"; //Redux Dispatch Functions
+import { useDispatch, useSelector } from "react-redux"; //Redux Dispatch Functions
 import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
 import { FontAwesome } from "@expo/vector-icons"; //Expo Icon Component
 import * as ImagePicker from "expo-image-picker"; //Expo Image Picker Component
@@ -23,6 +23,10 @@ export default function Add({ navigation }) {
   const Data = { Id, User, Localization, Image, Like, Comments }; //Collection Data State
 
   const Dispatch = useDispatch(); //Dispatch
+
+  const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background State
+
+  const ColorText = useSelector((state) => state.BackgroundSlice.Text); //Text Color State
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -52,7 +56,15 @@ export default function Add({ navigation }) {
   }; //Send Data Function
 
   return (
-    <SafeAreaView style={styles.Container}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: BackgroundColor,
+        alignItems: "center",
+        justifyContent: "center",
+        rowGap: 30,
+      }}
+    >
       {/* Id */}
       <TextInput
         style={styles.Input}
@@ -60,6 +72,7 @@ export default function Add({ navigation }) {
         onChangeText={(text) => setId(text)}
         placeholder={"Id"}
         keyboardType={"number-pad"}
+        placeholderTextColor={ColorText}
       />
       {/* User */}
       <TextInput
@@ -67,6 +80,7 @@ export default function Add({ navigation }) {
         value={User}
         onChangeText={(text) => setUser(text)}
         placeholder={"User"}
+        placeholderTextColor={ColorText}
       />
       {/* Localization */}
       <TextInput
@@ -74,10 +88,11 @@ export default function Add({ navigation }) {
         value={Localization}
         onChangeText={(text) => setLocalization(text)}
         placeholder={"Localization"}
+        placeholderTextColor={ColorText}
       />
       {/* Picker Image Button*/}
       <TouchableOpacity style={styles.PickerButton} onPress={pickImage}>
-        <FontAwesome name="picture-o" size={25} color="black" />
+        <FontAwesome name="picture-o" size={25} color={ColorText} />
       </TouchableOpacity>
       {/* Submit Button */}
       <TouchableOpacity style={styles.SubmitButton} onPress={SendData}>
@@ -88,13 +103,6 @@ export default function Add({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    rowGap: 30,
-  },
   Input: {
     width: "80%",
     height: 50,
