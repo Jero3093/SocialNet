@@ -1,11 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Octicons } from "@expo/vector-icons"; //Expo Icons
+import { Octicons, Feather } from "@expo/vector-icons"; //Expo Icons
 import Home from "../../Screens/Home"; //Home Screen
 import Add from "../../Screens/Add"; //Add Screen
 import Details from "../../Screens/Details"; //Details Screen
 import Comments from "../../Screens/Comments"; //Comments Screen
+import Settings from "../../Screens/Settings"; //Settings Screen
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -36,6 +37,15 @@ export default function Navigation() {
           options={{
             tabBarIcon: ({ color, size }) => {
               return <Octicons name="diff-added" size={size} color={color} />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            tabBarIcon: ({ color, size }) => {
+              return <Feather name="settings" size={size} color={color} />;
             },
           }}
         />
