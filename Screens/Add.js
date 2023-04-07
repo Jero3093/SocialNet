@@ -29,7 +29,6 @@ export default function Add({ navigation }) {
   const ColorText = useSelector((state) => state.BackgroundSlice.Text); //Text Color State
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -44,7 +43,10 @@ export default function Add({ navigation }) {
 
   const SendData = () => {
     if (((Id, User, Localization === ""), Image === null)) {
-      Alert.alert("Sorry", "Please fill the form to continue");
+      Alert.alert(
+        "Sorry",
+        "Please fill the form and import an image to continue"
+      );
     } else {
       Dispatch(AddSlice.actions.GetItems({ Items: Data }));
       setId("");
@@ -72,7 +74,7 @@ export default function Add({ navigation }) {
         onChangeText={(text) => setId(text)}
         placeholder={"Id"}
         keyboardType={"number-pad"}
-        placeholderTextColor={ColorText}
+        placeholderTextColor={"black"}
       />
       {/* User */}
       <TextInput
@@ -80,7 +82,7 @@ export default function Add({ navigation }) {
         value={User}
         onChangeText={(text) => setUser(text)}
         placeholder={"User"}
-        placeholderTextColor={ColorText}
+        placeholderTextColor={"black"}
       />
       {/* Localization */}
       <TextInput
@@ -88,10 +90,21 @@ export default function Add({ navigation }) {
         value={Localization}
         onChangeText={(text) => setLocalization(text)}
         placeholder={"Localization"}
-        placeholderTextColor={ColorText}
+        placeholderTextColor={"black"}
       />
       {/* Picker Image Button*/}
-      <TouchableOpacity style={styles.PickerButton} onPress={pickImage}>
+      <TouchableOpacity
+        style={{
+          width: 80,
+          height: 80,
+          borderRadius: 100,
+          borderWidth: 2,
+          borderColor: ColorText,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        onPress={pickImage}
+      >
         <FontAwesome name="picture-o" size={25} color={ColorText} />
       </TouchableOpacity>
       {/* Submit Button */}
@@ -107,17 +120,8 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 50,
     borderRadius: 10,
-    backgroundColor: "#12121212",
+    backgroundColor: "#DFDFDF",
     padding: 10,
-  },
-  PickerButton: {
-    width: 80,
-    height: 80,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: "#121212",
-    alignItems: "center",
-    justifyContent: "center",
   },
   SubmitButton: {
     width: "80%",
