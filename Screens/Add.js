@@ -26,8 +26,6 @@ export default function Add({ navigation }) {
 
   const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background State
 
-  const ColorText = useSelector((state) => state.BackgroundSlice.Text); //Text Color State
-
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -93,19 +91,8 @@ export default function Add({ navigation }) {
         placeholderTextColor={"black"}
       />
       {/* Picker Image Button*/}
-      <TouchableOpacity
-        style={{
-          width: 80,
-          height: 80,
-          borderRadius: 100,
-          borderWidth: 2,
-          borderColor: ColorText,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        onPress={pickImage}
-      >
-        <FontAwesome name="picture-o" size={25} color={ColorText} />
+      <TouchableOpacity style={styles.PickerButton} onPress={pickImage}>
+        <FontAwesome name="picture-o" size={30} color={"#00d7ff"} />
       </TouchableOpacity>
       {/* Submit Button */}
       <TouchableOpacity style={styles.SubmitButton} onPress={SendData}>
@@ -122,6 +109,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#DFDFDF",
     padding: 10,
+  },
+  PickerButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: "#00d7ff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   SubmitButton: {
     width: "80%",

@@ -8,6 +8,7 @@ export default function Settings() {
   const Dispatch = useDispatch(); //Dispatch
 
   const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background Color State
+  const TextColor = useSelector((state) => state.BackgroundSlice.Text); //Text Color State
 
   return (
     <View
@@ -34,7 +35,7 @@ export default function Settings() {
           <Ionicons
             name={BackgroundColor === "#fff" ? "moon" : "sunny"}
             size={40}
-            color={BackgroundColor === "#fff" ? "black" : "#fff"}
+            color={TextColor}
           />
         </TouchableOpacity>
       </View>
