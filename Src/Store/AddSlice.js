@@ -37,6 +37,14 @@ export const AddSlice = createSlice({
 
       Item.Comments = Comment; //The default Comment of the Item will be replaced with the Comment from the Comment Section
     },
+    DeletePost: (state, action) => {
+      const Item = action.payload.ItemData;
+      const PostItem = state.Items.find((item) => item.Id === Item.Id);
+
+      if (PostItem) {
+        state.Items = state.Items.filter((item) => item.Id !== PostItem.Id);
+      }
+    },
   },
 }); //Container of the function to change the States
 
