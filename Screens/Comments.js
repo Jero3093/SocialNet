@@ -29,7 +29,7 @@ export default function Comments({ navigation }) {
         style={{
           alignSelf: "center",
           marginTop: 20,
-          backgroundColor: ColorText,
+          backgroundColor: "#DFDFDF",
           width: 60,
           height: 8,
           borderRadius: 20,
@@ -42,14 +42,7 @@ export default function Comments({ navigation }) {
       {/* Text Input */}
       <View style={styles.Footer}>
         <TextInput
-          style={{
-            alignSelf: "center",
-            width: "80%",
-            height: 50,
-            backgroundColor: ColorText,
-            padding: 10,
-            borderRadius: 30,
-          }}
+          style={styles.Input}
           placeholder="Write a comment..."
           placeholderTextColor={"black"}
           value={Comment}
@@ -80,5 +73,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginTop: "auto",
     marginBottom: 20,
+  },
+  Input: {
+    alignSelf: "center",
+    width: "80%",
+    height: 50,
+    backgroundColor: "#DFDFDF",
+    padding: 10,
+    borderRadius: 30,
   },
 });
