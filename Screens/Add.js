@@ -61,7 +61,7 @@ export default function Add({ navigation }) {
     ) {
       Alert.alert(
         "Sorry",
-        "Please fill the form and import an image to continue"
+        "Fill the form and import a image or video to continue"
       );
     } else {
       Dispatch(AddSlice.actions.GetItems({ Items: Data }));
