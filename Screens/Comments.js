@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { FlashList } from "@shopify/flash-list";
 import { AntDesign } from "@expo/vector-icons"; //Expo Icons
 import { useSelector, useDispatch } from "react-redux"; //Redux Selector - Dispatch Component
 import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
@@ -38,7 +39,13 @@ export default function Comments({ navigation }) {
         onPress={() => navigation.goBack()}
       ></TouchableOpacity>
       {/* Comments List */}
-      <CommentCard Comment={ItemData.Comments} TextColor={ColorText} />
+      <FlashList
+        data={ItemData.Comments}
+        estimatedItemSize={100}
+        renderItem={({ item }) => (
+          <CommentCard Comment={item} TextColor={ColorText} />
+        )}
+      />
       {/* Text Input */}
       <View style={styles.Footer}>
         <TextInput

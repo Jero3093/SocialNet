@@ -35,7 +35,9 @@ export const AddSlice = createSlice({
       const { Comment, ItemID } = action.payload; //Comment String and Item Id from the Comment Section
       const Item = state.Items.find((item) => item.Id === ItemID); //Filter of the Item with the Id
 
-      Item.Comments = Comment; //The default Comment of the Item will be replaced with the Comment from the Comment Section
+      const CommentsArray = Item.Comments; //Taking only the comments array
+
+      CommentsArray.push(Comment); //Pushing all the comments into the comments array
     },
     DeletePost: (state, action) => {
       const Item = action.payload.ItemData;

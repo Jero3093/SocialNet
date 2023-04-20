@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { Ionicons, MaterialCommunityIcons, Fontisto } from "@expo/vector-icons"; //Expo Icons
 import { useDispatch } from "react-redux"; //Redux Dispatch
 import { useNavigation } from "@react-navigation/native"; //Navigation
 import { AddSlice } from "../../Store/AddSlice"; //Add Slice Component
+import { Video, ResizeMode } from "expo-av"; //Expo Video
 
 const Card = ({ Data, TextColor }) => {
+  const video = useRef(null);
+  const [status, setStatus] = useState({});
+
   const Dispatch = useDispatch(); //Dispatch
   const navigation = useNavigation(); //Navigation
 
@@ -36,8 +40,22 @@ const Card = ({ Data, TextColor }) => {
           />
         </TouchableOpacity>
       </View>
-      {/* Image */}
-      <Image source={{ uri: Data.Image }} style={styles.Image} />
+      {/* Image - Video */}
+      {Data.Video ? (
+        //Video
+        <Video
+          ref={video}
+          style={styles.video}
+          source={{ uri: Data.Video }}
+          useNativeControls
+          resizeMode={ResizeMode.CONTAIN}
+          onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+          shouldPlay={true}
+        />
+      ) : (
+        //Image
+        <Image source={{ uri: Data.Image }} style={styles.Image} />
+      )}
       {/* Buttons */}
       <View style={styles.ButtonsContainer}>
         {/* Like Button */}
@@ -83,7 +101,11 @@ const styles = StyleSheet.create({
   },
   Image: {
     width: "100%",
-    height: 350,
+    aspectRatio: 1,
+  },
+  video: {
+    width: "100%",
+    aspectRatio: 1,
   },
   ButtonsContainer: {
     padding: 10,

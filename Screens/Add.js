@@ -6,10 +6,11 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux"; //Redux Dispatch Functions
 import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
-import { FontAwesome } from "@expo/vector-icons"; //Expo Icon Component
+import { FontAwesome, Octicons } from "@expo/vector-icons"; //Expo Icon Component
 import * as ImagePicker from "expo-image-picker"; //Expo Image Picker Component
 
 export default function Add({ navigation }) {
@@ -17,10 +18,11 @@ export default function Add({ navigation }) {
   const [User, setUser] = useState(""); //User State
   const [Localization, setLocalization] = useState(""); //Localization State
   const [Image, setImage] = useState(null); //Image State
+  const [Video, setVideo] = useState(null); //Image State
   const Like = 0; //Like Number
-  const Comments = null; //Comments
+  const Comments = []; //Array of Comments
 
-  const Data = { Id, User, Localization, Image, Like, Comments }; //Collection Data State
+  const Data = { Id, User, Localization, Image, Like, Comments, Video }; //Collection Data State
 
   const Dispatch = useDispatch(); //Dispatch
 
@@ -28,7 +30,7 @@ export default function Add({ navigation }) {
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
@@ -39,8 +41,24 @@ export default function Add({ navigation }) {
     }
   }; //Image Picker Function
 
+  const pickVideo = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      allowsEditing: true,
+      aspect: [4, 3],
+      videoMaxDuration: 600,
+      videoQuality: 1,
+    });
+
+    if (!result.canceled) {
+      setVideo(result.assets[0].uri);
+    }
+  }; //Video Picker Function
+
   const SendData = () => {
-    if (((Id, User, Localization === ""), Image === null)) {
+    if (
+      ((Id, User, Localization === ""), Video ? Video === null : Image === null)
+    ) {
       Alert.alert(
         "Sorry",
         "Please fill the form and import an image to continue"
@@ -90,10 +108,15 @@ export default function Add({ navigation }) {
         placeholder={"Localization"}
         placeholderTextColor={"black"}
       />
-      {/* Picker Image Button*/}
-      <TouchableOpacity style={styles.PickerButton} onPress={pickImage}>
-        <FontAwesome name="picture-o" size={30} color={"#00d7ff"} />
-      </TouchableOpacity>
+      {/* Picker Buttons */}
+      <View style={{ flexDirection: "row", columnGap: 50 }}>
+        <TouchableOpacity style={styles.PickerButton} onPress={pickImage}>
+          <FontAwesome name="picture-o" size={30} color="#00d7ff" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.PickerButton} onPress={pickVideo}>
+          <Octicons name="video" size={30} color="#00d7ff" />
+        </TouchableOpacity>
+      </View>
       {/* Submit Button */}
       <TouchableOpacity style={styles.SubmitButton} onPress={SendData}>
         <Text style={styles.ButtonText}>Post</Text>
