@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,9 +11,13 @@ import {
 import { useSelector, useDispatch } from "react-redux"; //Redux Selector - Dispatch
 import { AddSlice } from "../Src/Store/AddSlice"; //Add Slice Component
 import { Ionicons, Fontisto } from "@expo/vector-icons"; //Expo Icons
+import { Video, ResizeMode } from "expo-av"; //Expo Video
 import Header from "../Src/Components/Details/Header"; //Header Component
 
 export default function Details({ navigation }) {
+  const video = useRef(null);
+  const [status, setStatus] = useState({});
+
   const ItemData = useSelector((state) => state.AddSlice.DetailsItem); //Data from the Details Item State
 
   const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background State
@@ -48,8 +52,21 @@ export default function Details({ navigation }) {
       <ScrollView>
         {/* Header */}
         <Header Data={ItemData} TextColor={ColorText} />
-        {/* Image */}
-        <Image source={{ uri: ItemData.Image }} style={styles.Image} />
+        {/* Video - Image */}
+        {ItemData.Video ? (
+          //Video
+          <Video
+            ref={video}
+            style={styles.Image}
+            source={{ uri: ItemData.Video }}
+            useNativeControls
+            resizeMode={ResizeMode.CONTAIN}
+            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+            shouldPlay={true}
+          />
+        ) : (
+          <Image source={{ uri: ItemData.Image }} style={styles.Image} />
+        )}
         {/* Buttons */}
         <View style={styles.ButtonsContainer}>
           {/* Like Button */}

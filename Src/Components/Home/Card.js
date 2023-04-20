@@ -45,7 +45,7 @@ const Card = ({ Data, TextColor }) => {
         //Video
         <Video
           ref={video}
-          style={styles.video}
+          style={styles.Image}
           source={{ uri: Data.Video }}
           useNativeControls
           resizeMode={ResizeMode.CONTAIN}
@@ -100,10 +100,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   Image: {
-    width: "100%",
-    aspectRatio: 1,
-  },
-  video: {
     width: "100%",
     aspectRatio: 1,
   },
