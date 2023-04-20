@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Octicons, Feather } from "@expo/vector-icons"; //Expo Icons
+import { useSelector } from "react-redux";
 import Home from "../../Screens/Home"; //Home Screen
 import Add from "../../Screens/Add"; //Add Screen
 import Details from "../../Screens/Details"; //Details Screen
@@ -12,6 +13,8 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
+  const Background = useSelector((state) => state.BackgroundSlice.Color);
+
   function TabNav() {
     return (
       <Tab.Navigator
@@ -20,6 +23,10 @@ export default function Navigation() {
           headerShown: false,
           tabBarActiveTintColor: "#00d7ff",
           tabBarInactiveTintColor: "grey",
+          tabBarStyle: {
+            backgroundColor: Background,
+            borderTopColor: Background,
+          },
         }}
       >
         <Tab.Screen
