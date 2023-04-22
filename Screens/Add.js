@@ -14,19 +14,21 @@ import { FontAwesome, Octicons } from "@expo/vector-icons"; //Expo Icon Componen
 import * as ImagePicker from "expo-image-picker"; //Expo Image Picker Component
 
 export default function Add({ navigation }) {
-  const [Id, setId] = useState(""); //Id State
   const [User, setUser] = useState(""); //User State
   const [Localization, setLocalization] = useState(""); //Localization State
   const [Image, setImage] = useState(null); //Image State
   const [Video, setVideo] = useState(null); //Image State
-  const Like = 0; //Like Number
-  const Comments = []; //Array of Comments
-
-  const Data = { Id, User, Localization, Image, Like, Comments, Video }; //Collection Data State
+  const Like = 0; //Default Like Number
+  const Comments = []; //Empty Array of Comments
 
   const Dispatch = useDispatch(); //Dispatch
 
   const BackgroundColor = useSelector((state) => state.BackgroundSlice.Color); //Background State
+
+  const generateId = () => {
+    const newId = Math.random().toString(36);
+    return newId;
+  }; //Function to generate a random Id for the Post
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -57,18 +59,35 @@ export default function Add({ navigation }) {
 
   const SendData = () => {
     if (
-      ((Id, User, Localization === ""), Video ? Video === null : Image === null)
+      User === "" ||
+      Localization === "" ||
+      (Video ? Video === null : Image === null)
     ) {
       Alert.alert(
         "Sorry",
         "Fill the form and import a image or video to continue"
       );
     } else {
-      Dispatch(AddSlice.actions.GetItems({ Items: Data }));
-      setId("");
-      setLocalization("");
+      //Generated Id by Function
+      const Id = generateId();
+      //Send all the parameters to the State
+      Dispatch(
+        AddSlice.actions.GetItems({
+          Items: {
+            Id,
+            User,
+            Localization,
+            Image,
+            Video,
+            Like,
+            Comments,
+          },
+        })
+      );
       setUser("");
+      setLocalization("");
       setImage(null);
+      setVideo(null);
       navigation.navigate("Home");
     }
   }; //Send Data Function
@@ -83,15 +102,6 @@ export default function Add({ navigation }) {
         rowGap: 30,
       }}
     >
-      {/* Id */}
-      <TextInput
-        style={styles.Input}
-        value={Id}
-        onChangeText={(text) => setId(text)}
-        placeholder={"Id"}
-        keyboardType={"number-pad"}
-        placeholderTextColor={"black"}
-      />
       {/* User */}
       <TextInput
         style={styles.Input}
@@ -130,8 +140,8 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 50,
     borderRadius: 10,
-    backgroundColor: "#DFDFDF",
     padding: 10,
+    backgroundColor: "#DFDFDF",
   },
   PickerButton: {
     width: 80,
