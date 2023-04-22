@@ -50,7 +50,7 @@ const Card = ({ Data, TextColor }) => {
           useNativeControls
           resizeMode={ResizeMode.CONTAIN}
           onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-          shouldPlay={true}
+          shouldPlay={false}
         />
       ) : (
         //Image
